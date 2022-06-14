@@ -1,0 +1,22 @@
+.menu-label{
+    text-align: center;
+    padding: 2%;
+    font-size: 200%;
+    color: rgb(255, 0, 106);
+    height: 8%;
+    margin-bottom: 10%;
+}
+.menu-content{
+    height: 80%;
+    margin-left: 15%;
+    margin-right: 15%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .btn{
+        font-size: 120%;
+    }
+}
+.m-t {
+    margin-top: 100px;
+}

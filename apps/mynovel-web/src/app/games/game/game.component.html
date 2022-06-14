@@ -1,0 +1,33 @@
+<ng-container *ngIf="gameService.source$ | async as source">
+    <mat-drawer-container class="container" [style.background-image]="getBackground(source.background)" autosize>
+        <mat-drawer #drawer class="sidenav" mode="over" autoFocus="false">
+            <app-game-menu (close)="drawer.close()"></app-game-menu>
+        </mat-drawer>
+    
+        <div class="choice" *ngIf="source.sourceLinks.length > 1">
+            <div class="choice-items" *ngFor="let link of source.sourceLinks">
+                <div class="choice-item" (click)="gameService.nextSource(link.src, true)">{{link.lable}}</div>
+            </div>
+        </div>
+
+        <img *ngIf="source.person" class="person" [src]="getPerson(source.person)">
+
+        <div class="dialog" (click)="gameService.nextSource(source.sourceLinks[0].src)">
+            <div class="title">
+                <span *ngIf="source.gameDialog.title" [style.color]="source.gameDialog.title?.color">{{source.gameDialog.title?.text}}</span>
+            </div>
+            <div class="discription">
+                {{gameService.gameDialog$ | async}}
+            </div>
+        </div>
+
+        <div class="menu">
+            <div class="menu-item" (click)="gameService.back()">Back</div>
+            <div class="menu-item" (click)="gameService.skip(source.sourceLinks)">Skip</div>
+            <div class="menu-item" [ngClass]="{'menu-item-active':gameService.isAuto}" (click)="gameService.tougleAutoMode()">Auto</div>
+            <div class="menu-item" (click)="drawer.toggle()">Menu</div>
+        </div>
+    
+    </mat-drawer-container>
+  </ng-container>
+  

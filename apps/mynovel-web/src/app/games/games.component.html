@@ -1,0 +1,24 @@
+<div class="wrapper">
+    <div class="label">Games</div>
+    <div class="buttons">
+        <ng-container *ngIf="source$ | async as sources">
+            <ng-container *ngFor="let source of sources">
+                <button 
+                    mat-raised-button 
+                    color="primary" 
+                    class="btn"
+                    (click)="routing('games/' + source.id)">
+                    {{source.name}}
+                </button>
+            </ng-container>
+        </ng-container>
+        <button 
+            mat-raised-button 
+            color="accent" 
+            class="btn"
+            (click)="routing('menu')">
+            Back to menu
+        </button>
+    </div>
+</div>
+

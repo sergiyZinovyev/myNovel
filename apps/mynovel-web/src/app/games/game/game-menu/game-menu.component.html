@@ -1,0 +1,42 @@
+<div class="menu-label">{{gameService.gameNameSync}}</div>
+<div class="menu-content">
+    <button 
+        mat-raised-button 
+        color="accent" 
+        class="btn">
+        Save
+    </button>
+    <button 
+        mat-raised-button 
+        color="accent" 
+        class="btn">
+        Load
+    </button>
+    <button 
+        mat-raised-button 
+        color="accent" 
+        class="btn"
+        (click)="newGame()">
+        New game
+    </button>
+    <button 
+        mat-raised-button 
+        color="accent" 
+        class="btn">
+        Settings
+    </button>
+    <button 
+        mat-raised-button 
+        color="primary" 
+        class="btn m-t"
+        (click)="exit('games')">
+        Exit
+    </button>
+    <button 
+        mat-raised-button 
+        color="primary" 
+        class="btn"
+        (click)="backToGame()">
+        Back to game
+    </button>
+</div>
