@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { GameService } from '@app/services/game.service';
+import { GameService } from '@myorg/game-player';
 
 @Component({
   selector: 'app-game-menu',
@@ -24,7 +24,7 @@ export class GameMenuComponent implements OnInit {
   }
 
   public exit(route?: string){
-    this.gameService.skipSourceToStart();
+    this.gameService.skipSourceToStart(false);
     this.routing(route);
   }
 

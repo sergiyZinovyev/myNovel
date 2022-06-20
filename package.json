@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "mn-web": "nx serve mynovel-web --port 4210",
+    "mn-web": "nx serve mynovel-web --host 0.0.0.0 --port 4210",
     "ng": "nx",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
     "start": "nx serve",

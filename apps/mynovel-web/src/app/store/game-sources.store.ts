@@ -1,4 +1,5 @@
-import { Game, GameSource } from "../interfaces/game-source.interface";
+//import { Game, GameSource } from "../interfaces/game-source.interface";
+import { Game, GameSource } from '@myorg/game-data';
 
 export const GameSources: Game = {
     name: "Peak's Adventures",

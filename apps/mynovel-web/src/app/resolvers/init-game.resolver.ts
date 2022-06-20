@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
-  Router, Resolve,
+  Resolve,
   RouterStateSnapshot,
   ActivatedRouteSnapshot
 } from '@angular/router';
-import { Game } from '@app/interfaces/game-source.interface';
-import { StoreService } from '@app/services/store.service';
+import { Game } from '@myorg/game-data';
+import { StoreService } from '@myorg/game-player';
 import { Observable } from 'rxjs';
 
 @Injectable({

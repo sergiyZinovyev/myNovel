@@ -1,17 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { environment } from '@environment/environment';
-import { GameService } from '@app/services/game.service';
-
-//export const baseURL = './assets/data';
-//export const textSpeed = 50;
+import { GameService } from '@myorg/game-player';
 
 @Component({
   selector: 'app-main',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
 
   constructor(
     public gameService: GameService,
@@ -19,7 +16,7 @@ export class GameComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.gameService.textDrawer(this.gameService.source$.value?.gameDialog.discription.text)
+    this.gameService.nextSource(1)
   }
 
   public getBackground(background: string) : SafeResourceUrl {
@@ -28,6 +25,10 @@ export class GameComponent implements OnInit {
 
   public getPerson(person: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(`${environment.rootRout}/${this.gameService.gameIdSync}/${person}`);
+  }
+
+  ngOnDestroy(): void {
+    this.gameService.textDrawer('');
   }
 
 }

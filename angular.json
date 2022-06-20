@@ -2,6 +2,8 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
+    "game-data": "libs/game-data",
+    "game-player": "libs/game-player",
     "mynovel-web": "apps/mynovel-web",
     "mynovel-web-e2e": "apps/mynovel-web-e2e"
   }

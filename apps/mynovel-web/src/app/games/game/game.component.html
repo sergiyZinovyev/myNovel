@@ -25,7 +25,7 @@
             <div class="menu-item" (click)="gameService.back()">Back</div>
             <div class="menu-item" (click)="gameService.skip(source.sourceLinks)">Skip</div>
             <div class="menu-item" [ngClass]="{'menu-item-active':gameService.isAuto}" (click)="gameService.tougleAutoMode()">Auto</div>
-            <div class="menu-item" (click)="drawer.toggle()">Menu</div>
+            <div class="menu-item" (click)="drawer.toggle(); gameService.isAuto = false">Menu</div>
         </div>
     
     </mat-drawer-container>
