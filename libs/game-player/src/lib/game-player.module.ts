@@ -16,5 +16,5 @@ export class GamePlayerModule {
         ngModule: GamePlayerModule,
         providers: [{ provide: config, useValue: gamePlayerModuleConfig }]
     };
-}
+  }
 }

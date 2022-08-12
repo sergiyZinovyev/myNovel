@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Game } from '@myorg/game-data';
+import { Game, GameInfo } from '@myorg/game-data';
 import { config } from './game-player.config';
 import { GamePlayerModuleConfig } from './game-player.interfaces';
 
@@ -23,5 +23,9 @@ export class BackendService {
 
   public getGameById(id: number): Observable<Game> {
     return this.httpClient.get<Game>(`${this.baseURL}/${id}/data.json`)
+  }
+
+  public getAllGames(): Observable<GameInfo[]> {
+    return this.httpClient.get<GameInfo[]>(`${this.baseURL}/sources.json`)
   }
 }

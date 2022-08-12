@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { GameSource, SourceLink } from '@myorg/game-data';
 import { BehaviorSubject, Subscription, timer } from 'rxjs';
 import { StoreService } from '@myorg/game-player';
+import { GamePlayerModuleConfig } from './game-player.interfaces';
+import { config } from './game-player.config';
 
 export const textSpeed: number = 70;
 export const gameSpeed: number = 1000;
@@ -23,12 +25,25 @@ export class GameService {
 
   private timer$: Subscription | undefined;
 
+  private isMobile: boolean = false;
+
   constructor(
+    @Inject(config) private gamePlayerModuleConfig: GamePlayerModuleConfig,
     public storeService: StoreService,
-  ) { }
+  ) { 
+    console.log('gameService init')
+  }
+
+  private get baseURL(): string {
+    return this.gamePlayerModuleConfig.url
+  }
 
   private getSourceById(id: number | undefined): GameSource | undefined {
-    return this.storeService.gameSourcesSync.find(src => {return src.id === id})
+    return this.storeService.gameSourcesSync?.find(src => {return src.id === id}) || undefined
+  }
+
+  public setMobile(): void {
+    this.isMobile = true
   }
 
   public skipSourceToStart(startNewGame: boolean = true): void {
@@ -56,7 +71,7 @@ export class GameService {
     let currentText = text.split('');
     this.timer$ = timer(0, textSpeed).subscribe((d) => {
       this.gameDialog$.next(this.gameDialog$.value + currentText.splice(0, 1)[0]);
-      if(this.gameDialog$.value[this.gameDialog$.value.length-1] !== ' ') {
+      if(this.gameDialog$.value[this.gameDialog$.value.length-1] !== ' ' && !this.isMobile) {
         this.playAudio().play();
       }
       if(text.length - 1 === d) {
@@ -74,7 +89,7 @@ export class GameService {
     const myAudio = new Audio;
     myAudio.muted = false;
     myAudio.volume = 0.02;
-    myAudio.src = './assets/key-click2.wav';
+    myAudio.src = `${this.baseURL}/key-click2.wav`;
     return myAudio
   }
 

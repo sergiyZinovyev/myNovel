@@ -32,7 +32,7 @@ export class StoreService {
   }
 
   public get gameNameSync(): string {
-    return this.game$.value.name
+    return this.game$?.value.name
   }
 
   public get gameSources$(): Observable<GameSource[]> {
@@ -42,11 +42,11 @@ export class StoreService {
   }
 
   public get gameSourcesSync(): GameSource[] {
-    return this.game$.value.gameSources
+    return this.game$?.value.gameSources
   }
 
   public get gameIdSync(): number {
-    return this.game$.value.id
+    return this.game$?.value.id
   }
   
 }

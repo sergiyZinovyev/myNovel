@@ -1,0 +1,14 @@
+<!-- <ActionBar title="GAMES" class="action-bar" flat="true"></ActionBar> -->
+<StackLayout class="p-20" *ngIf="source$ | async as sources">
+  <Label text="Available Games" class="h1 text-center c-white"></Label>
+  <ng-container *ngFor="let source of sources">
+    <button [text]="source.name" (tap)="onTap(source.id)" class="btn"></button>
+  </ng-container>
+
+  <!-- <button text="Tap this game1!" (tap)="onTap($event)" class="btn"></button>
+  <button text="Tap me!" (tap)="onTap($event)" class="btn"></button> -->
+
+
+  <!-- <Label text="Enjoy" class="h1 text-center c-white"></Label>
+  <Image src="~/assets/images/nx-nativescript.png" class="h-center m-t-20" width="300"></Image> -->
+</StackLayout>

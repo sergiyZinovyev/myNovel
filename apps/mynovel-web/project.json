@@ -5,7 +5,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/mynovel-web",
         "index": "apps/mynovel-web/src/index.html",
@@ -85,7 +87,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/mynovel-web"],
+      "outputs": [
+        "coverage/apps/mynovel-web"
+      ],
       "options": {
         "jestConfig": "apps/mynovel-web/jest.config.ts",
         "passWithNoTests": true

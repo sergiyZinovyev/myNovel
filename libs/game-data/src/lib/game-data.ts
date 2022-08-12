@@ -1,6 +1,8 @@
-export interface Game {
+export interface GameInfo {
   name: string,
-  id: number,
+  id: number
+}
+export interface Game extends GameInfo{
   gameSources: GameSource[]
 }
 

@@ -5,6 +5,7 @@
     "game-data": "libs/game-data",
     "game-player": "libs/game-player",
     "mynovel-web": "apps/mynovel-web",
-    "mynovel-web-e2e": "apps/mynovel-web-e2e"
+    "mynovel-web-e2e": "apps/mynovel-web-e2e",
+    "nativescript-mynovel": "apps/nativescript-mynovel"
   }
 }

@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
 
-  rootRout: './assets/data'
+  rootRout: './assets/data',
+  //rootRoutMob: '~/assets/data'
 };
 
 /*
