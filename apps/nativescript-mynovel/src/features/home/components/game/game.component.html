@@ -1,16 +1,18 @@
 <ng-container *ngIf="gameService.source$ | async as source">
-    <RadSideDrawer>
+    <RadSideDrawer [height]="screenHeight" verticalAlignment="bottom">
         <StackLayout tkDrawerContent class="sideStackLayout">
             <Label [text]="gameService.gameNameSync" style="horizontal-align: center" class="game-name"></Label>
-            <StackLayout class="top-btn-group">
-                <button text="Save" backgroundColor="rgb(252, 41, 111)" class="btn"></button>
-                <button text="Load" backgroundColor="rgb(252, 41, 111)" class="btn"></button>
-                <button text="New game" (tap)="newGame()" backgroundColor="rgb(252, 41, 111)" class="btn"></button>
-                <button text="Settings" backgroundColor="rgb(252, 41, 111)" class="btn"></button>
+            <StackLayout  
+                [style.marginTop]="topPosBtnMainGroup">
+                <button text="Save" backgroundColor="rgb(252, 41, 111)" [ngClass]="this.isLandscape?'btn-landscape':'btn'" [ngStyle]="btnFontSize"></button>
+                <button text="Load" backgroundColor="rgb(252, 41, 111)" [ngClass]="this.isLandscape?'btn-landscape':'btn'" [ngStyle]="btnFontSize"></button>
+                <button text="New game" (tap)="newGame()" backgroundColor="rgb(252, 41, 111)" [ngClass]="this.isLandscape?'btn-landscape':'btn'" [ngStyle]="btnFontSize"></button>
+                <button text="Settings" backgroundColor="rgb(252, 41, 111)" [ngClass]="this.isLandscape?'btn-landscape':'btn'" [ngStyle]="btnFontSize"></button>
             </StackLayout>
-            <StackLayout class="bottom-btn-group">
-                <button text="Exit" (tap)="exit()" backgroundColor="rgb(74, 74, 197)" class="btn"></button>
-                <button text="Back to game" (tap)="onCloseDrawerTap()" backgroundColor="rgb(74, 74, 197)" class="btn"></button>
+            <StackLayout
+                [style.marginTop]="topPosBtnGroup">
+                <button text="Exit" (tap)="exit()" backgroundColor="rgb(74, 74, 197)" [ngClass]="this.isLandscape?'btn-landscape':'btn'" [ngStyle]="btnFontSize"></button>
+                <button text="Back to game" (tap)="onCloseDrawerTap()" backgroundColor="rgb(74, 74, 197)" [ngClass]="this.isLandscape?'btn-landscape':'btn'" [ngStyle]="btnFontSize"></button>
             </StackLayout>
         </StackLayout>
         <StackLayout tkMainContent>
@@ -35,7 +37,7 @@
                 <!-- Choice -->
                 <StackLayout
                     *ngIf="source.sourceLinks.length > 1"
-                    top="150%"
+                    [top]="choiceTopPos"
                     width="100%">
                     <ng-container *ngFor="let link of source.sourceLinks">
                         <StackLayout 
@@ -53,15 +55,17 @@
                 </StackLayout>
                 <!-- Dialog -->
                 <StackLayout
-                    top="606%"
+                    [top]="dialogTopPos"
                     width="100%"
-                    height="20%"
+                    [height]="dialogHeight"
+                    [style.fontSize]="fontSize * 1.6 + 'px'"
                     class="dialog"
                     (tap)="gameService.nextSource(source.sourceLinks[0].src)">
-                    <StackLayout class="title">
+                    <StackLayout class="title" [height]="fontSize * 2 * scale + 'px'">
                         <label 
                             *ngIf="source.gameDialog.title" 
                             [style.color]="source.gameDialog.title?.color"
+                            [style.fontSize]="fontSize * 1.9 + 'px'"
                             [text]="source.gameDialog.title?.text">
                         </label>
                     </StackLayout>
@@ -71,14 +75,15 @@
                         textWrap="true">
                     </label>
                 </StackLayout>
-                <!-- Menu -->
+                <!-- Bottom Menu -->
                 <FlexboxLayout
-                    top="735%"
+                    [top]="bottomMenuTopPos"
                     width="100%"
-                    height="3%"
+                    [height]="bottomMenuHeight"
                     orientation="horizontal"
                     justifyContent="space-around"
-                    class="menu">
+                    class="menu"
+                    [style.fontSize]="fontSize + 'px'">
                     <label text="Back" class="menu-item" (tap)="gameService.back()"></label>
                     <label text="Skip" class="menu-item" (tap)="gameService.skip(source.sourceLinks)"></label>
                     <label text="Auto" class="menu-item" [ngClass]="{'menu-item-active':gameService.isAuto}" (tap)="gameService.tougleAutoMode()"></label>

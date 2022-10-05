@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameInfo } from '@myorg/game-data';
 import { BackendService } from '@myorg/game-player';
-import { Button, EventData } from '@nativescript/core';
 import { BehaviorSubject } from 'rxjs';
 import { setStatusBarColor } from '../../../utils';
-
 @Component({
   moduleId: module.id,
   selector: 'app-home',
@@ -25,7 +23,7 @@ export class HomeComponent {
   }
 
   ngOnInit() {
-    setStatusBarColor('dark', '#97d9e9');
+    setStatusBarColor('dark', '#143055');
   }
 
   onTap(sourceId) {

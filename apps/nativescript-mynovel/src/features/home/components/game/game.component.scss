@@ -27,6 +27,7 @@
 .menu{
     padding-left: 80%;
     padding-right: 80%;
+    //background-color: red;
     .menu-item{
         color: rgba(255, 255, 255, 0.349);
     }
@@ -42,12 +43,13 @@
     .title{
         color: aqua;
         height: 20%;
-        font-size: 25%;
+        //font-size: 1.5em;
     }
     .discription{
         color: white;
         padding-left: 20%;
-        font-size: 20%;
+        //font-size: 20%;
+        //font-size: 1em;
     }
 }
 
@@ -60,20 +62,22 @@
 
 .sideStackLayout {
     background-color: rgba(0, 0, 0, 0.849);
-}
-
-.top-btn-group{
-    margin-top: 200px;
-}
-
-.bottom-btn-group{
-    margin-top: 300px;
+    font-size: 8px;
 }
 
 .btn{
     color: white;
     font-weight: bold;
     border-radius: 75px;
+    width: 85%;
+}
+
+.btn-landscape{
+    color: white;
+    font-weight: bold;
+    border-radius: 75px;
+    width: 80%;
+    padding: 0 !important;
 }
 
 .game-name{
