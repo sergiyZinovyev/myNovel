@@ -1,4 +1,5 @@
 {
+  "name": "mynovel-web",
   "projectType": "application",
   "sourceRoot": "apps/mynovel-web/src",
   "prefix": "myorg",
@@ -68,7 +69,10 @@
           "browserTarget": "mynovel-web:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps\\mynovel-web/proxy.conf.json"
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

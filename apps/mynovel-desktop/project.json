@@ -1,0 +1,78 @@
+{
+  "name": "mynovel-desktop",
+  "sourceRoot": "apps/mynovel-desktop/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx-electron:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/apps/mynovel-desktop",
+        "main": "apps/mynovel-desktop/src/main.ts",
+        "tsConfig": "apps/mynovel-desktop/tsconfig.app.json",
+        "assets": [
+          "apps/mynovel-desktop/src/assets"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/mynovel-desktop/src/environments/environment.ts",
+              "with": "apps/mynovel-desktop/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "nx-electron:execute",
+      "options": {
+        "buildTarget": "mynovel-desktop:build"
+      }
+    },
+    "package": {
+      "executor": "nx-electron:package",
+      "options": {
+        "name": "mynovel-desktop",
+        "frontendProject": "mynovel-web",
+        "outputPath": "dist/packages",
+        "prepackageOnly": true
+      }
+    },
+    "make": {
+      "executor": "nx-electron:make",
+      "options": {
+        "name": "mynovel-desktop",
+        "frontendProject": "mynovel-web",
+        "outputPath": "dist/executables"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/mynovel-desktop/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/apps/mynovel-desktop"
+      ],
+      "options": {
+        "jestConfig": "apps/mynovel-desktop/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

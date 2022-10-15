@@ -1,4 +1,5 @@
 {
+  "name": "game-player",
   "projectType": "library",
   "sourceRoot": "libs/game-player/src",
   "prefix": "myorg",

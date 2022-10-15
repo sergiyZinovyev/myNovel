@@ -1,4 +1,5 @@
 {
+  "name": "nativescript-mynovel",
   "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "sourceRoot": "apps/nativescript-mynovel/src",
   "projectType": "application",
