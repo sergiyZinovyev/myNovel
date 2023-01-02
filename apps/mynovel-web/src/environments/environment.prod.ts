@@ -1,5 +1,8 @@
-export const environment = {
-  production: true,
+import { ModeEnum } from "@myorg/game-data";
+import { IEnvironment } from "@environment/environment.interface";
 
-  rootRout: './assets/data'
+export const environment: IEnvironment = {
+  production: true,
+  rootRout: './assets/data',
+  mode: ModeEnum.Web
 };

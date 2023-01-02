@@ -15,14 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@app/*": ["apps/mynovel-web/src/app/*"],
+      "@backend/*": ["apps/mynovel-web/src/app/backend/*"],
+      "@core/*": ["apps/mynovel-web/src/app/core/*"],
+      "@environment/*": ["apps/mynovel-web/src/environments/*"],
       "@myorg/game-data": ["libs/game-data/src/index.ts"],
       "@myorg/game-player": ["libs/game-player/src/index.ts"],
-      "@environment/*": [ "apps/mynovel-web/src/environments/*" ],
-      "@shared/*": [ "apps/mynovel-web/src/app/shared/*" ],
-      "@pages/*": [ "apps/mynovel-web/src/app/pages/*" ],
-      "@backend/*": [ "apps/mynovel-web/src/app/backend/*" ],
-      "@core/*": [ "apps/mynovel-web/src/app/core/*" ],
-      "@app/*": [ "apps/mynovel-web/src/app/*" ]
+      "@pages/*": ["apps/mynovel-web/src/app/pages/*"],
+      "@shared/*": ["apps/mynovel-web/src/app/shared/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

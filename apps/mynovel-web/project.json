@@ -1,4 +1,5 @@
 {
+  "name": "mynovel-web",
   "projectType": "application",
   "sourceRoot": "apps/mynovel-web/src",
   "prefix": "myorg",
@@ -54,6 +55,41 @@
           "extractLicenses": false,
           "sourceMap": true,
           "namedChunks": true
+        },
+        "production-desktop": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/mynovel-web/src/environments/environment.ts",
+              "with": "apps/mynovel-web/src/environments/desktop/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development-desktop": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/mynovel-web/src/environments/environment.ts",
+              "with": "apps/mynovel-web/src/environments/desktop/environment.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -66,9 +102,18 @@
         },
         "development": {
           "browserTarget": "mynovel-web:build:development"
+        },
+        "production-desktop": {
+          "browserTarget": "mynovel-web:build:production-desktop"
+        },
+        "development-desktop": {
+          "browserTarget": "mynovel-web:build:development-desktop"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps\\mynovel-web/proxy.conf.json"
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

@@ -1,0 +1,26 @@
+<div *ngIf="source" #container class="container" [style.background-image]="getBackground(source.background)">
+    <div class="choice" *ngIf="source.sourceLinks.length > 1 && isSetFontSize">
+        <div class="choice-items" *ngFor="let link of source.sourceLinks">
+            <div class="choice-item" [ngClass]="{'disable': disabled}" (click)="gameService.nextSource(link.src, true)">{{link.lable}}</div>
+        </div>
+    </div>
+
+    <img *ngIf="source.person" class="person" [src]="getPerson(source.person)">
+
+    <div *ngIf="isSetFontSize" class="dialog" [ngClass]="{'disable': disabled}" (click)="gameService.nextSource(source.sourceLinks[0].src)">
+        <div class="title">
+            <span *ngIf="source.gameDialog?.title" [style.color]="source.gameDialog.title?.color">{{source.gameDialog.title?.text}}</span>
+        </div>
+        <div class="discription">
+            <ng-container *ngIf="!disabled; else notDrawerText">{{gameService.gameDialog$ | async}}</ng-container>
+            <ng-template #notDrawerText>{{gameService.gameDialogDiscriptionById(source.id)}}</ng-template>
+        </div>
+    </div>
+
+    <div class="menu" *ngIf="!disabled && isSetFontSize">
+        <div class="menu-item" (click)="gameService.back()">Back</div>
+        <div class="menu-item" (click)="gameService.skip(source.sourceLinks)">Skip</div>
+        <div class="menu-item" [ngClass]="{'menu-item-active':gameService.isAuto}" (click)="gameService.tougleAutoMode()">Auto</div>
+        <div class="menu-item" (click)="toggleMenu(); gameService.isAuto = false">Menu</div>
+    </div>
+</div>

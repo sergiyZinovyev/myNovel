@@ -1,0 +1,33 @@
+<div #container class="container">
+    <div class="label">Saved games</div>
+    <div class="games-container" *ngIf="storeService.savedGames$ | async as games">
+        <ng-container *ngFor="let game of games; let idx = index; trackBy: trackSavingId">
+            <div *ngIf="gameHeight"
+                class="game" 
+                [style.height.px]="gameHeight"
+                [style.marginBottom.px]="
+                    idx === games.length - 1 || 
+                    idx === games.length - 2 || 
+                    idx === games.length - 3 || 
+                    idx === games.length - 4 ? 0 : gameHeight / 10">
+                <div class="game-img"
+                    (mouseenter)="toggleCancel(true, idx)"
+                    (mouseleave)="toggleCancel(false, idx)">
+                    <myorg-game-area 
+                        class="saved-games" 
+                        [source]="gameService.getSourceById(game.id)" 
+                        [disabled]=true
+                        (click)="loadGame(game.id)">
+                    </myorg-game-area>
+                    <div class="remove-btn" *ngIf="isVisibleCancel?.visible && isVisibleCancel?.id === idx">
+                        <div class="icon-background"></div>
+                        <button mat-icon-button color="accent" (click)="removeSaving(game.savingId)">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <div class="game-label" [style.fontSize.px]="gameHeight / 15">{{game.name}}</div>
+            </div>
+        </ng-container>
+    </div>
+</div>
