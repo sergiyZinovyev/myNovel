@@ -2,7 +2,8 @@ import { ModeEnum } from "@myorg/game-data";
 import { IEnvironment } from "@environment/environment.interface";
 
 export const environment: IEnvironment = {
-  production: true,
+  production: false,
   rootRout: './assets/data',
-  mode: ModeEnum.Web
+  mode: ModeEnum.Desktop
+  //rootRoutMob: '~/assets/data'
 };

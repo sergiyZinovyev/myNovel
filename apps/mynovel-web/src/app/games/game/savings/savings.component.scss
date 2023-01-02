@@ -1,0 +1,52 @@
+@import "../../../../assets/styles/colors";
+
+.label{
+    text-align: center;
+    padding-bottom: 15px;
+    font-size: 200%;
+    color: $accent;
+    font-weight: 500;
+}
+.games-container{
+    display: flex;
+    column-gap: 3.89%;
+    row-gap: 5%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    .game{
+        width: 22%;
+        .game-img{
+            position: relative;
+            height: 85%;
+            width: 100%;
+            border: 1px solid white;
+            border-radius: 15px;
+            box-sizing: border-box;
+            cursor: pointer;
+            .remove-btn {
+                position: absolute;
+                right: 0;
+                top: 0;
+                .icon-background {
+                    top: 12px;
+                    right: 11px;
+                    position: absolute;
+                    background-color: white;
+                    height: 18px;
+                    width: 18px;
+                    border-radius: 9px;
+                }
+            }
+        }
+        .game-img:hover {
+            border-color: $accent;
+            border-width: 3px;
+            border-radius: 18px;
+        }
+        .game-label{
+            text-align: center;
+            margin-top: 2%;
+        }
+    }
+}

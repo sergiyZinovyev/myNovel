@@ -1,8 +1,10 @@
-import { BrowserWindow, shell, screen } from 'electron';
+import { BrowserWindow, shell, screen, ipcMain } from 'electron';
 import { rendererAppName, rendererAppPort } from './constants';
 import { environment } from '../environments/environment';
 import { join } from 'path';
 import { format } from 'url';
+import { Storage } from './services/store.service';
+import { ChannelEnum, StatusEnum } from '@myorg/game-data';
 
 export default class App {
   // Keep a global reference of the window object, if you don't, the window will
@@ -75,6 +77,12 @@ export default class App {
     App.mainWindow.setMenu(null);
     App.mainWindow.center();
 
+    if(!environment.production) {
+      App.mainWindow.webContents.openDevTools(); // open DevTools
+    }
+    
+    App.subscribeForIPC();
+
     // if main window is ready to show, close the splash window and show the main window
     App.mainWindow.once('ready-to-show', () => {
       App.mainWindow.show();
@@ -93,6 +101,20 @@ export default class App {
       // when you should delete the corresponding element.
       App.mainWindow = null;
     });
+  }
+
+  private static subscribeForIPC() {
+    const storeService: Storage = new Storage();
+
+    ipcMain.on(ChannelEnum.Save, (_, entry, key) => {
+      storeService.set(key, entry)
+        .then(() => App.mainWindow.webContents.send(ChannelEnum.SaveDone, StatusEnum.Done));
+    })
+
+    ipcMain.on(ChannelEnum.Load, (_, key) => {
+      storeService.get(key)
+        .then(entry => App.mainWindow.webContents.send(ChannelEnum.SavedGames, entry));
+    })
   }
 
   private static loadMainWindow() {

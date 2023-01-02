@@ -4,5 +4,5 @@ import { IEnvironment } from "@environment/environment.interface";
 export const environment: IEnvironment = {
   production: true,
   rootRout: './assets/data',
-  mode: ModeEnum.Web
+  mode: ModeEnum.Desktop
 };

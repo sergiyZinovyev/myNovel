@@ -38,8 +38,12 @@ export class GameService {
     return this.gamePlayerModuleConfig.url
   }
 
-  private getSourceById(id: number | undefined): GameSource | undefined {
+  public getSourceById(id: number | undefined): GameSource | undefined {
     return this.storeService.gameSourcesSync?.find(src => {return src.id === id}) || undefined
+  }
+
+  public gameDialogDiscriptionById(id: number | undefined): string | undefined {
+    return this.getSourceById(id)?.gameDialog.discription.text
   }
 
   public setMobile(): void {
@@ -93,7 +97,7 @@ export class GameService {
     return myAudio
   }
 
-  public skip(sourceLinks: SourceLink[], prevSourceId: number | undefined = this.source$.value?.id): void{
+  public skip(sourceLinks: SourceLink[] | undefined, prevSourceId: number | undefined = this.source$.value?.id): void{
     if(sourceLinks?.length !== 1 ) return;
     if(this.prevSourceId[this.prevSourceId.length - 1] !== prevSourceId) this.prevSourceId.push(prevSourceId);
     

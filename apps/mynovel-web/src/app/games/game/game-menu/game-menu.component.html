@@ -3,16 +3,18 @@
     <button 
         mat-raised-button 
         color="accent" 
-        class="btn">
+        class="btn"
+        (click)="save()">
         Save
     </button>
     <button 
         mat-raised-button 
         color="accent" 
-        class="btn">
+        class="btn"
+        (click)="chageLayout(gameLayoutEnum.Saving)">
         Load
     </button>
-    <button 
+    <button
         mat-raised-button 
         color="accent" 
         class="btn"
@@ -22,10 +24,11 @@
     <button 
         mat-raised-button 
         color="accent" 
-        class="btn">
+        class="btn"
+        (click)="chageLayout(gameLayoutEnum.Setting)">
         Settings
     </button>
-    <button 
+    <button
         mat-raised-button 
         color="primary" 
         class="btn m-t"
@@ -36,7 +39,7 @@
         mat-raised-button 
         color="primary" 
         class="btn"
-        (click)="backToGame()">
+        (click)="chageLayout(gameLayoutEnum.GameArea)">
         Back to game
     </button>
 </div>

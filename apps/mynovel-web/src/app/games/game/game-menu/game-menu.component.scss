@@ -1,8 +1,10 @@
+@import "../../../../assets/styles/colors";
+
 .menu-label{
     text-align: center;
     padding: 2%;
     font-size: 200%;
-    color: rgb(255, 0, 106);
+    color: $accent;
     height: 8%;
     margin-bottom: 10%;
 }

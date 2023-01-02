@@ -2,10 +2,13 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
-  production: false,
+import { ModeEnum } from "@myorg/game-data";
+import { IEnvironment } from "@environment/environment.interface";
 
+export const environment: IEnvironment = {
+  production: false,
   rootRout: './assets/data',
+  mode: ModeEnum.Web
   //rootRoutMob: '~/assets/data'
 };
 

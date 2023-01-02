@@ -3,14 +3,18 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "mn-web": "nx serve mynovel-web --host 0.0.0.0 --port 4210",
-    "mn-electron": "nx serve mynovel-desktop",
-    "mn-desktop": "npm-run-all -l -p mn-web mn-electron",
-    "mn-android": "npx nx run nativescript-mynovel:android",
+    "mn-web": "nx serve mynovel-web --host 0.0.0.0 --port 4220",
     "mn-web-build": "nx build mynovel-web",
+
+    "mn-desktop": "npm-run-all -l -p mn-electron-rendering mn-electron",
+    "mn-desktop-make": "npm-run-all -l -s mn-electron-rendering-build mn-electron-build mn-electron-make",
+    "mn-electron-rendering": "nx serve mynovel-web --host 0.0.0.0 --port 4210  -c development-desktop",
+    "mn-electron": "nx serve mynovel-desktop",
+    "mn-electron-rendering-build": "nx build mynovel-web -c production-desktop",
     "mn-electron-build": "nx build mynovel-desktop",
     "mn-electron-make": "nx run mynovel-desktop:make",
-    "mn-desktop-make": "npm-run-all -l -s mn-web-build mn-electron-build mn-electron-make",
+    
+    "mn-android": "npx nx run nativescript-mynovel:android",
     "ng": "nx",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
     "start": "nx serve",

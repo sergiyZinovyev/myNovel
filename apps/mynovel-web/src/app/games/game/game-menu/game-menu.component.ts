@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameService } from '@myorg/game-player';
+import { GameLayoutEnum } from '../game.component';
 
 @Component({
   selector: 'app-game-menu',
@@ -9,7 +10,13 @@ import { GameService } from '@myorg/game-player';
 })
 export class GameMenuComponent implements OnInit {
 
+  public gameLayoutEnum = GameLayoutEnum;
+
   @Output() public close: EventEmitter<void> = new EventEmitter();
+
+  @Output() public newLayout: EventEmitter<GameLayoutEnum> = new EventEmitter();
+
+  @Output() public save$: EventEmitter<void> = new EventEmitter();
 
   constructor(
     public gameService: GameService,
@@ -32,13 +39,18 @@ export class GameMenuComponent implements OnInit {
     this.close.emit()
   }
 
+  public chageLayout(layout: GameLayoutEnum): void {
+    this.newLayout.emit(layout);
+    this.closeMenu()
+  }
+
   public newGame(): void {
     this.gameService.skipSourceToStart();
     this.closeMenu()
   }
 
-  public backToGame(): void {
-    this.closeMenu()
+  public save(): void {
+    this.save$.emit()
   }
 
 }
