@@ -58,7 +58,7 @@ export class SavingsComponent implements OnInit, AfterViewInit {
   }
 
   public loadGame(sourceId: number): void {
-    this.gameService.nextSource(sourceId);
+    this.gameService.nextSource(sourceId, true);
     this.exit.emit()
   }
 

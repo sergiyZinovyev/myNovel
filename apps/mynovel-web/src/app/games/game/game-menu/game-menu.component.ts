@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { AudioPlayerService } from '@app/services/audio-player.service';
 import { GameService } from '@myorg/game-player';
 import { GameLayoutEnum } from '../game.component';
 
@@ -21,6 +22,7 @@ export class GameMenuComponent implements OnInit {
   constructor(
     public gameService: GameService,
     private router: Router,
+    private audioPlayerService: AudioPlayerService
   ) { }
 
   ngOnInit(): void {}
@@ -32,6 +34,7 @@ export class GameMenuComponent implements OnInit {
 
   public exit(route?: string){
     this.gameService.skipSourceToStart(false);
+    this.audioPlayerService.stop();
     this.routing(route);
   }
 

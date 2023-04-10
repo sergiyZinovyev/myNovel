@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { StatusEnum } from '@myorg/game-data';
-import { BehaviorSubject, filter } from 'rxjs';
-import { StoreService } from './store-service/store.service';
+import { BehaviorSubject, filter, map } from 'rxjs';
+import { KeyDataEnum, StoreService } from './store-service/store.service';
 
 export interface ISaving {
     id: number;
@@ -33,7 +33,10 @@ export class SavingService {
     public savedGames$: BehaviorSubject<ISaving[]> = new BehaviorSubject([] as ISaving[]);
     
     constructor(private storeService: StoreService) {    
-        this.storeService.storeData$.pipe(filter(data => !!data)).subscribe((data: string) => {
+        this.storeService.storeData$.pipe(
+            filter(data => !!data && data.key === KeyDataEnum.Savings),
+            map((data) => data.data),
+        ).subscribe((data: string) => {
             if(this.initGameInProgress$.value) {
                 this.savedGames$.next(JSON.parse(data));
                 this.savedGames = JSON.parse(data);
@@ -54,7 +57,7 @@ export class SavingService {
     public addSaving(id: number, gameId: number = this.activeGameId): void {
         if (this.isSavingFile$.value === StatusEnum.InProgress) return;
         const savedGames: ISaving[] = JSON.parse(JSON.stringify(this.savedGames));
-        const savingId = savedGames.map(item => item.savingId).length 
+        const savingId = savedGames?.map(item => item.savingId)?.length 
             ? Math.max( ...savedGames.map(item => item.savingId) ) + 1
             : 1;
         savedGames.unshift(new Saving(id, new Date().toLocaleString(), savingId));

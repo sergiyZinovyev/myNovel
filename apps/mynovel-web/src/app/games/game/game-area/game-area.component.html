@@ -12,7 +12,7 @@
             <span *ngIf="source.gameDialog?.title" [style.color]="source.gameDialog.title?.color">{{source.gameDialog.title?.text}}</span>
         </div>
         <div class="discription">
-            <ng-container *ngIf="!disabled; else notDrawerText">{{gameService.gameDialog$ | async}}</ng-container>
+            <ng-container *ngIf="isDrawerText && !disabled; else notDrawerText">{{gameService.gameDialog$ | async}}</ng-container>
             <ng-template #notDrawerText>{{gameService.gameDialogDiscriptionById(source.id)}}</ng-template>
         </div>
     </div>

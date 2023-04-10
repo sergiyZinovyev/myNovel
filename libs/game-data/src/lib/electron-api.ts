@@ -14,6 +14,7 @@ export enum ChannelEnum {
   Load = 'load',
   SaveDone = 'save-done',
   SavedGames = 'saved-games',
+  Settings = 'settings'
 }
 
 export type SavedGamesFunction = (event: any, data: string) => void;
@@ -21,6 +22,7 @@ export type SaveStatusFunction = (event: any, data: StatusEnum) => void;
 
 export interface ElectronApi {
   subscribeForSavedGames: (callback: SavedGamesFunction) => void,
+  subscribeForSettings: (callback: SavedGamesFunction) => void,
   subscribeForSaveDone: (callback: SaveStatusFunction) => void,
   saveEntry: (key: string, data: string) => void,
   loadEntry: (key: string) => void,

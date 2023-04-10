@@ -6,6 +6,10 @@ const api: ElectronApi = {
     ipcRenderer.on(ChannelEnum.SavedGames, callback)
   },
 
+  subscribeForSettings: (callback: (event: Electron.IpcRendererEvent, data: string) => void): void => {
+    ipcRenderer.on(ChannelEnum.Settings, callback)
+  },
+
   subscribeForSaveDone: (callback: (event: Electron.IpcRendererEvent, data: StatusEnum) => void): void => {
     ipcRenderer.on(ChannelEnum.SaveDone, callback)
   },
@@ -20,8 +24,3 @@ const api: ElectronApi = {
 }
 
 contextBridge.exposeInMainWorld('electron', api)
-
-// contextBridge.exposeInMainWorld('electron', {
-//   // getAppVersion: () => ipcRenderer.invoke('get-app-version'),
-//   // platform: process.platform,
-// });

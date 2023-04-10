@@ -5,8 +5,9 @@ import { StoreService } from '@myorg/game-player';
 import { GamePlayerModuleConfig } from './game-player.interfaces';
 import { config } from './game-player.config';
 
-export const textSpeed: number = 70;
-export const gameSpeed: number = 1000;
+export const TEXT_SPEED: number = 70;
+export const GAME_SPEED: number = 1000;
+export const SOUND: number = 0.02;
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,12 @@ export class GameService {
 
   public isAuto: boolean = false;
 
+  public textSpeed: number | null = TEXT_SPEED;
+
+  public gameSpeed: number | null = GAME_SPEED;
+
+  public sound: number = SOUND;
+
   private gameAutoTimer: any;
 
   private prevSourceId: Array<number | undefined> = [];
@@ -30,9 +37,7 @@ export class GameService {
   constructor(
     @Inject(config) private gamePlayerModuleConfig: GamePlayerModuleConfig,
     public storeService: StoreService,
-  ) { 
-    console.log('gameService init')
-  }
+  ) { }
 
   private get baseURL(): string {
     return this.gamePlayerModuleConfig.url
@@ -73,9 +78,11 @@ export class GameService {
     if(this.timer$) this.timer$.unsubscribe();
     if (!text) return;
     let currentText = text.split('');
+    let textSpeed: number = this.textSpeed ?? 0;
+    let gameSpeed: number = this.gameSpeed ? this.gameSpeed : GAME_SPEED;
     this.timer$ = timer(0, textSpeed).subscribe((d) => {
       this.gameDialog$.next(this.gameDialog$.value + currentText.splice(0, 1)[0]);
-      if(this.gameDialog$.value[this.gameDialog$.value.length-1] !== ' ' && !this.isMobile) {
+      if(this.gameDialog$.value[this.gameDialog$.value.length-1] !== ' ' && !this.isMobile && textSpeed) {
         this.playAudio().play();
       }
       if(text.length - 1 === d) {
@@ -92,7 +99,7 @@ export class GameService {
   private playAudio(): HTMLAudioElement{
     const myAudio = new Audio;
     myAudio.muted = false;
-    myAudio.volume = 0.02;
+    myAudio.volume = this.sound;
     myAudio.src = `${this.baseURL}/key-click2.wav`;
     return myAudio
   }

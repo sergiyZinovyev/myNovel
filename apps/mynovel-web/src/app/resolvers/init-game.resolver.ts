@@ -13,9 +13,11 @@ import { Observable } from 'rxjs';
 })
 export class InitGameResolver implements Resolve<Game> {
 
-  constructor(private storeService: StoreService) {}
+  constructor(
+    private storeService: StoreService,
+  ) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Game> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Game> { 
     return this.storeService.setGameById(Number(route.paramMap.get('id')));
   }
 }

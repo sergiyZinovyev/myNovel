@@ -112,8 +112,14 @@ export default class App {
     })
 
     ipcMain.on(ChannelEnum.Load, (_, key) => {
-      storeService.get(key)
-        .then(entry => App.mainWindow.webContents.send(ChannelEnum.SavedGames, entry));
+      if(key.split('.')[1] === 'save'){
+        storeService.get(key)
+          .then(entry => App.mainWindow.webContents.send(ChannelEnum.SavedGames, entry));
+      }
+      if(key.split('.')[1] === 'settings'){
+        storeService.get(key)
+          .then(entry => App.mainWindow.webContents.send(ChannelEnum.Settings, entry));
+      }
     })
   }
 

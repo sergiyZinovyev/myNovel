@@ -1,1 +1,51 @@
-<p>settings works!</p>
+<div class="container">
+    <div class="title">Settings</div>
+    <div class="slider-container">
+        <div class="label">Game speed</div>
+        <mat-slider
+            class="slider"
+            id="gameSpeed"
+            [thumbLabel]="thumbLabel"
+            [value]="gameSpeed"
+            (change)="sliderChange($event)">
+        </mat-slider>
+        <div class="value">{{gameSpeed}}</div>
+    </div>
+
+    <div class="slider-container">
+        <div class="label">Text speed</div>
+        <mat-slider
+            class="slider"
+            id="textSpeed"
+            [thumbLabel]="thumbLabel"
+            [value]="textSpeed"
+            (change)="sliderChange($event)">
+        </mat-slider>
+        <div class="value">{{textSpeed}}</div>
+    </div>
+
+    <div class="slider-container">
+        <div class="label">Sound volume</div>
+        <mat-slider
+            class="slider"
+            id="sound"
+            [thumbLabel]="thumbLabel"
+            [value]="sound"
+            (change)="sliderChange($event)">
+        </mat-slider>
+        <div class="value">{{sound}}</div>
+    </div>
+
+    <div class="slider-container">
+        <div class="label">Music volume</div>
+        <mat-slider
+            class="slider"
+            id="music"
+            [thumbLabel]="thumbLabel"
+            [value]="music"
+            (change)="sliderChange($event)">
+        </mat-slider>
+        <div class="value">{{music}}</div>
+    </div>
+      
+</div>

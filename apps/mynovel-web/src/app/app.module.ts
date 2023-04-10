@@ -13,6 +13,7 @@ import { StoreService } from './services/store-service/store.service';
 import { ModeEnum } from '@myorg/game-data';
 import { StoreServiceElectron } from './services/store-service/electron.store.service';
 import { StoreServiceLocal } from './services/store-service/local.store.service';
+import { SettingsService } from './services/settings.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,8 @@ import { StoreServiceLocal } from './services/store-service/local.store.service'
     { 
       provide: StoreService, 
       useClass: environment.mode === ModeEnum.Desktop ? StoreServiceElectron : StoreServiceLocal 
-    }
+    },
+    SettingsService,
   ],
   bootstrap: [AppComponent]
 })

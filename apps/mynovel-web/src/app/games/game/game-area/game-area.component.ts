@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { AudioPlayerService } from '@app/services/audio-player.service';
 import { environment } from '@environment/environment';
 import { GameSource } from '@myorg/game-data';
 import { GameService } from '@myorg/game-player';
@@ -10,9 +11,10 @@ import { GameService } from '@myorg/game-player';
   styleUrls: ['./game-area.component.scss'],
 })
 
-export class GameAreaComponent implements OnInit, AfterViewInit, OnDestroy {
+export class GameAreaComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
 
   public isSetFontSize: boolean = false;
+  public isDrawerText: boolean = false;
 
   @Input()
   public source!: GameSource | undefined;
@@ -29,10 +31,21 @@ export class GameAreaComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     public gameService: GameService,
     private sanitizer: DomSanitizer,
-  ) {}
+    private audioPlayerService: AudioPlayerService
+  ) {
+    this.isDrawerText = !!this.gameService.textSpeed;
+  }
 
   ngOnInit(): void {
-    //this.gameService.nextSource(1) 
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.disabled) return;
+    const currentTrack = this.getLastSegment(this.audioPlayerService.currentTrack);
+    const curSound = changes['source']?.currentValue?.sound;
+    if((curSound || currentTrack) && (curSound !== currentTrack)) {  
+      this.playSound(curSound)
+    }
   }
 
   ngAfterViewInit() {
@@ -50,6 +63,20 @@ export class GameAreaComponent implements OnInit, AfterViewInit, OnDestroy {
     let size = value / 100;
     this.getNativeElement().style.fontSize = `${size}px`;
     this.isSetFontSize = true;
+  }
+
+  public playSound(src: string) {
+    this.audioPlayerService.removeCurrentTrack();
+    if(!src) {
+      this.audioPlayerService.stop();
+      return
+    }
+    const soundSrc = `${environment.rootRout}/${this.gameService.gameIdSync}/${src}`;
+    this.audioPlayerService.addTrack(soundSrc);
+  }
+
+  private getLastSegment(path: string): string {
+    return path.substring(path.lastIndexOf('/') + 1);
   }
 
   public getBackground(background: string) : SafeResourceUrl {

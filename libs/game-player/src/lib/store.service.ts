@@ -8,8 +8,6 @@ import { BackendService } from '@myorg/game-player';
   providedIn: 'root'
 })
 export class StoreService {
-  
-  //private _game: Game | undefined;
 
   public game$!: BehaviorSubject<Game>;
 
@@ -17,7 +15,7 @@ export class StoreService {
 
   public setGameById(id: number): Observable<Game>{
     return this.backendService.getGameById(id).pipe(
-      tap(game => this.game$ = new BehaviorSubject(game))
+      tap(game => this.game$ = new BehaviorSubject(game)),
     )
   }
 

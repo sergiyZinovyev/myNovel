@@ -21,20 +21,16 @@ export class GameComponent implements OnInit, OnDestroy {
 
   public activeLayout: GameLayoutEnum = this.gameLayoutEnum.GameArea;
 
-  //private gameId: number;
-
   constructor(
     private route: ActivatedRoute,
     public gameService: GameService,
     private sanitizer: DomSanitizer,
-    public storeService: SavingService
-  ) {
-    //this.gameId = Number(this.route.snapshot.paramMap.get('id'));
-  }
+    public storeService: SavingService,
+  ) {}
 
   ngOnInit(): void {
     this.storeService.initGame(Number(this.route.snapshot.paramMap.get('id')));
-    this.gameService.nextSource(1)
+    this.gameService.nextSource(1, true);
   }
 
   public switchLayout(layout: GameLayoutEnum): void {
@@ -44,10 +40,6 @@ export class GameComponent implements OnInit, OnDestroy {
   public getBackground(background: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(`url("${environment.rootRout}/${this.gameService.gameIdSync}/${background}")`);
   }
-
-  // public getPerson(person: string): SafeResourceUrl {
-  //   return this.sanitizer.bypassSecurityTrustResourceUrl(`${environment.rootRout}/${this.gameService.gameIdSync}/${person}`);
-  // }
 
   public save(savingId: number): void {
     this.storeService.addSaving(savingId)
